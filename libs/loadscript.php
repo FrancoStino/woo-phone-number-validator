@@ -47,7 +47,7 @@ class WPV_Scripts_Loader
     public function load_checkout_script()
     {
         if (is_checkout() || is_account_page()) {
-            wp_enqueue_script('wpv_default_scripts', $this->theme_directory . '/functions/woo-phone-number-validator/js/default.js');
+            wp_enqueue_script('wpv_default_scripts', $this->theme_directory . '/functions/woo-phone-number-validator/js/default.min.js');
         }
     }
 }
