@@ -1,0 +1,22 @@
+@import "intlTelInput.css";
+
+.iti {
+    display: block;
+}
+
+#phone_error.error {
+    background: red;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#phone_error.valid {
+    background: green;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#phone_error {
+    color: white;
+    border-radius: 35px;
+}
