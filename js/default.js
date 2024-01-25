@@ -61,10 +61,3 @@ jQuery(document).ready(function ($) {
     $('.iti__selected-flag').css('border-bottom-left-radius', borderRadiusValue);
 
 });
-
-
-
-jQuery(document).ready(function ($) {
-    // Ottieni il valore di border-radius dall'input
-
-});
