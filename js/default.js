@@ -9,14 +9,13 @@ jQuery(document).ready(function ($) {
         iti = window.intlTelInput(input, {
             initialCountry: country.toLowerCase(),
             showSelectedDialCode: true,
-            nationalMode: true,
             countrySearch: false,
-            separateDialCode: true,
+            hiddenInput: () => "final_phone_number",
             utilsScript: "/utils.js"
         });
     };
 
-    input.setAttribute("inputmode", "numeric");
+    //input.setAttribute("inputmode", "numeric");
     input.setAttribute("oninput", "this.value = this.value.replace(/\\D+/g, '')");
     // Inizializza intlTelInput all'avvio
     initializeIntlTelInput();
@@ -27,16 +26,9 @@ jQuery(document).ready(function ($) {
 
     input.addEventListener('blur', function () {
         reset();
-        if (input.value.trim()) {
+        if (input.value) {
             if (iti.isValidNumber()) {
-                const phoneNumber = iti.getNumber();
                 $("#phone_error").removeClass().addClass('valid').text("Numero valido!" /*+ "Full international format: " + phoneNumber*/);
-
-                // Rimuovi l'input esistente se presente
-                $("#final_phone_number").remove();
-
-                // Aggiungi dinamicamente l'input con il numero ottenuto
-                checkout_form.append('<input type="hidden" id="final_phone_number" name="final_phone_number" value="' + phoneNumber + '">');
             } else {
                 const errorCode = iti.getValidationError()
                 input.focus();
@@ -49,8 +41,6 @@ jQuery(document).ready(function ($) {
     input.addEventListener('change', reset);
     input.addEventListener('keyup', reset);
 
-    var checkout_form = $('form.checkout');
-
     // Ottieni il valore di border-radius dall'input
     var borderRadiusValue = $('#billing_phone').css('border-radius');
 
@@ -59,5 +49,4 @@ jQuery(document).ready(function ($) {
 
     // Applica lo stesso valore a .iti__selected-flag per border-bottom-left-radius
     $('.iti__selected-flag').css('border-bottom-left-radius', borderRadiusValue);
-
 });
