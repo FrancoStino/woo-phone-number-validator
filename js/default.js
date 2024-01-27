@@ -20,15 +20,26 @@ jQuery(document).ready(function ($) {
             initialCountry: country.toLowerCase(),
             showSelectedDialCode: true,
             countrySearch: false,
+<<<<<<< HEAD
             //hiddenInput: () => "final_phone_number",
+=======
+            hiddenInput: () => "final_phone_number",
+>>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
             utilsScript: "/utils.js"
         });
     };
 
+<<<<<<< HEAD
     // Aggiungi !important a tutti gli stili esistenti
     const importantStyle = function () {
         if (input) {
             var stileInline = input.getAttribute("style") || "";
+=======
+    //input.setAttribute("inputmode", "numeric");
+    input.setAttribute("oninput", "this.value = this.value.replace(/\\D+/g, '')");
+    // Inizializza intlTelInput all'avvio
+    initializeIntlTelInput();
+>>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
 
             // Aggiungi !important solo ai valori esistenti e se non è già presente
             if (stileInline) {
@@ -56,6 +67,7 @@ jQuery(document).ready(function ($) {
         }
     };
 
+<<<<<<< HEAD
     // Inizializza intlTelInput all'avvio
     initializeIntlTelInput();
     // Inizializza importanStyle
@@ -66,6 +78,13 @@ jQuery(document).ready(function ($) {
         if (input.value) {
             if (iti.isValidNumber()) {
                 $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
+=======
+    input.addEventListener('blur', function () {
+        reset();
+        if (input.value) {
+            if (iti.isValidNumber()) {
+                $("#phone_error").removeClass().addClass('valid').text("Numero valido!" /*+ "Full international format: " + phoneNumber*/);
+>>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
             } else {
                 const errorCode = iti.getValidationError()
                 input.focus();
@@ -81,11 +100,15 @@ jQuery(document).ready(function ($) {
      */
     input.addEventListener('blur', reset);
     input.addEventListener('change', reset);
+<<<<<<< HEAD
     //input.addEventListener('keyup', reset);
     //input.addEventListener('keypress', reset);
     //input.addEventListener('keydown', reset);
     //input.addEventListener('input', reset);
     //input.addEventListener('submit', reset)
+=======
+    input.addEventListener('keyup', reset);
+>>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
 
     // Ottieni il valore di border-radius dall'input
     var borderRadiusValue = $('#billing_phone').css('border-radius');
@@ -95,8 +118,12 @@ jQuery(document).ready(function ($) {
 
     // Applica lo stesso valore a .iti__selected-flag per border-bottom-left-radius
     $('.iti__selected-flag').css('border-bottom-left-radius', borderRadiusValue);
+<<<<<<< HEAD
 
     // Applica il valore a #phone_error per border-radius
     $('#phone_error').css('border-radius', borderRadiusValue);
 
 });
+=======
+});
+>>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
