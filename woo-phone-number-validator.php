@@ -26,20 +26,10 @@ class PhoneNumberValidator
         add_action('woocommerce_new_order', array(__CLASS__, 'update_billing_phone_after_order'), 10, 1);
 
         // Aggiorna il numero di telefono dopo il salvataggio dei dati sull'account
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
         add_action("woocommerce_process_myaccount_field_billing_phone", array(__CLASS__, 'update_billing_phone_account_address'), 10);
 
         // WC Notice se il numero di telefono non è valido
         add_action('woocommerce_after_checkout_validation', array(__CLASS__, 'validate_phone_number'));
-<<<<<<< HEAD
-=======
-=======
-        add_action( "woocommerce_process_myaccount_field_billing_phone", array(__CLASS__, 'update_billing_phone_account_address'), 10);
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
     }
 
     // Verifica se WooCommerce è attivo
@@ -82,10 +72,6 @@ class PhoneNumberValidator
         $final_phone_number = sanitize_text_field($_POST['final_phone_number']);
         return $final_phone_number;
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
 
     public static function validate_phone_number()
     {
@@ -98,12 +84,6 @@ class PhoneNumberValidator
         }
     }
 
-<<<<<<< HEAD
-=======
-=======
-        
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
 }
 
 // Inizializza la classe

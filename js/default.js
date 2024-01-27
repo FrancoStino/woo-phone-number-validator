@@ -11,11 +11,7 @@ jQuery(document).ready(function ($) {
     input.setAttribute("oninput", "this.value = this.value.replace(/\\D+/g, '')");
 
     var finalPhoneNumber = document.createElement('input');
-<<<<<<< HEAD
     finalPhoneNumber.setAttribute('type', 'hidden');
-=======
-    finalPhoneNumber.setAttribute('type', 'text');
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
     finalPhoneNumber.setAttribute('name', 'final_phone_number');
     input.after(finalPhoneNumber);
 
@@ -24,36 +20,15 @@ jQuery(document).ready(function ($) {
             initialCountry: country.toLowerCase(),
             showSelectedDialCode: true,
             countrySearch: false,
-<<<<<<< HEAD
             //hiddenInput: () => "final_phone_number",
-=======
-<<<<<<< HEAD
-            //hiddenInput: () => "final_phone_number",
-=======
-            hiddenInput: () => "final_phone_number",
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
             utilsScript: "/utils.js"
         });
     };
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
     // Aggiungi !important a tutti gli stili esistenti
     const importantStyle = function () {
         if (input) {
             var stileInline = input.getAttribute("style") || "";
-<<<<<<< HEAD
-=======
-=======
-    //input.setAttribute("inputmode", "numeric");
-    input.setAttribute("oninput", "this.value = this.value.replace(/\\D+/g, '')");
-    // Inizializza intlTelInput all'avvio
-    initializeIntlTelInput();
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
 
             // Aggiungi !important solo ai valori esistenti e se non è già presente
             if (stileInline) {
@@ -81,10 +56,6 @@ jQuery(document).ready(function ($) {
         }
     };
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
     // Inizializza intlTelInput all'avvio
     initializeIntlTelInput();
     // Inizializza importanStyle
@@ -93,20 +64,8 @@ jQuery(document).ready(function ($) {
         $("#phone_error").text("").removeClass();
 
         if (input.value) {
-<<<<<<< HEAD
             if (iti.isValidNumber()) {
                 $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
-=======
-            if (iti.isValidNumber()) {
-                $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
-=======
-    input.addEventListener('blur', function () {
-        reset();
-        if (input.value) {
-            if (iti.isValidNumber()) {
-                $("#phone_error").removeClass().addClass('valid').text("Numero valido!" /*+ "Full international format: " + phoneNumber*/);
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
             } else {
                 const errorCode = iti.getValidationError()
                 input.focus();
@@ -122,21 +81,11 @@ jQuery(document).ready(function ($) {
      */
     input.addEventListener('blur', reset);
     input.addEventListener('change', reset);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
     //input.addEventListener('keyup', reset);
     //input.addEventListener('keypress', reset);
     //input.addEventListener('keydown', reset);
     //input.addEventListener('input', reset);
     //input.addEventListener('submit', reset)
-<<<<<<< HEAD
-=======
-=======
-    input.addEventListener('keyup', reset);
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
 
     // Ottieni il valore di border-radius dall'input
     var borderRadiusValue = $('#billing_phone').css('border-radius');
@@ -146,15 +95,8 @@ jQuery(document).ready(function ($) {
 
     // Applica lo stesso valore a .iti__selected-flag per border-bottom-left-radius
     $('.iti__selected-flag').css('border-bottom-left-radius', borderRadiusValue);
-<<<<<<< HEAD
 
     // Applica il valore a #phone_error per border-radius
     $('#phone_error').css('border-radius', borderRadiusValue);
 
 });
-<<<<<<< HEAD
-=======
-=======
-});
->>>>>>> bcf85dddda52dbbb4fe0b342f626436b7f53db13
->>>>>>> 94a390d9f7a5d6fb94d69d11b2cc9111bb682454
