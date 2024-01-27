@@ -1,22 +1,36 @@
 @import "intlTelInput.css";
-
 .iti {
     display: block;
 }
-
 #phone_error.error {
     background: red;
     padding: 10px;
     margin-top: 10px;
 }
-
 #phone_error.valid {
     background: green;
     padding: 10px;
     margin-top: 10px;
 }
-
 #phone_error {
     color: white;
-    border-radius: 35px;
+    width: fit-content;
+}
+.iti__flag {
+    box-shadow: 0 0 1px 0 #888;
+    background-image: url(../img/flags.png?1) !important;
+}
+.checkout-wc .iti__selected-flag {
+    padding: 1.35em 0.8em 0.28em;
+    max-height: unset !important;
+}
+.iti__country {
+    padding: 8px 8px !important;
+}
+.iti:has(input:placeholder-shown) .iti__selected-flag {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.iti__selected-flag {
+    transition: all 0.2s ease-out;
 }
