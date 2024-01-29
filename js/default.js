@@ -29,6 +29,7 @@ jQuery(document).ready(function ($) {
     const importantStyle = function () {
         if (input) {
             var stileInline = input.getAttribute("style") || "";
+<<<<<<< HEAD
 
             // Aggiungi !important solo ai valori esistenti e se non è già presente
             if (stileInline) {
@@ -68,6 +69,45 @@ jQuery(document).ready(function ($) {
             if (iti.isValidNumber()) {
                 $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
                 finalPhoneNumber.setAttribute('value', iti.getNumber());
+=======
+
+            // Aggiungi !important solo ai valori esistenti e se non è già presente
+            if (stileInline) {
+                var stiliArray = stileInline.split(';').filter(Boolean);
+                if (!stiliArray.some(style => style.includes("!important"))) {
+                    stileInline = stiliArray.map(style => style + ' !important').join(';');
+                }
+            }
+
+            // Imposta lo stile aggiornato
+            input.setAttribute("style", stileInline);
+
+            // Popola il campo nascosto per salvare il numero completo con prefisso
+            if (input.value.length > 0) {
+                if (iti.isValidNumber()) {
+                    //finalPhoneNumber.setAttribute('value', iti.getNumber());
+                    $('input[name="final_phone_number"]').val(iti.getNumber());
+                } else {
+                    //finalPhoneNumber.setAttribute('value', 'false');
+                    $('input[name="final_phone_number"]').val(false);
+                }
+            } else {
+                $('input[name="final_phone_number"]').val(null);
+            }
+        }
+    };
+
+    // Inizializza intlTelInput all'avvio
+    initializeIntlTelInput();
+    // Inizializza importanStyle
+    setInterval(importantStyle, 0);
+    const reset = function () {
+        $("#phone_error").text("").removeClass();
+
+        if (input.value) {
+            if (iti.isValidNumber()) {
+                $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
+>>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
             } else {
                 const errorCode = iti.getValidationError()
                 input.focus();
@@ -80,12 +120,17 @@ jQuery(document).ready(function ($) {
     //console.log(iti.isValidNumber());
 
     /**
+<<<<<<< HEAD
      * Trigger Eventi per gli errori e il clonaggio del valore.
+=======
+     * Trigger Eventi per gli errori
+>>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
      */
     input.addEventListener('blur', reset);
     input.addEventListener('change', reset);
     //input.addEventListener('keyup', reset);
     //input.addEventListener('keypress', reset);
+<<<<<<< HEAD
     input.addEventListener('keydown', reset);
     //input.addEventListener('input', reset);
     //input.addEventListener('submit', reset)
@@ -97,6 +142,11 @@ jQuery(document).ready(function ($) {
     input.addEventListener('input', importantStyle);
 
 
+=======
+    //input.addEventListener('keydown', reset);
+    //input.addEventListener('input', reset);
+    //input.addEventListener('submit', reset)
+>>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
 
     // Ottieni il valore di border-radius dall'input
     var borderRadiusValue = $('#billing_phone').css('border-radius');
@@ -110,8 +160,11 @@ jQuery(document).ready(function ($) {
     // Applica il valore a #phone_error per border-radius
     $('#phone_error').css('border-radius', borderRadiusValue);
 
+<<<<<<< HEAD
 
     // Inizializza reset all'avvio
     reset();
 
+=======
+>>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
 });
