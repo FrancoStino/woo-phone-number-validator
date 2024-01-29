@@ -124,11 +124,8 @@ jQuery(document).ready(function ($) {
     // Applica il valore a #phone_error per border-radius
     $('#phone_error').css('border-radius', borderRadiusValue);
 
-<<<<<<< HEAD
 
     // Inizializza reset all'avvio
     reset();
 
-=======
->>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
 });
