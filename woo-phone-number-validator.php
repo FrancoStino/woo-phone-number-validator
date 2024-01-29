@@ -23,7 +23,13 @@ class PhoneNumberValidator
         require_once(plugin_dir_path(__FILE__) . 'libs/loadscript.php');
 
         // Aggiorna il numero di telefono dopo la creazione di un nuovo ordine
-        add_action('woocommerce_new_order', array(__CLASS__, 'update_billing_phone'), 10, 1);
+        add_action('woocommerce_new_order', array(__CLASS__, 'update_billing_phone_after_order'), 10, 1);
+
+        // Aggiorna il numero di telefono dopo il salvataggio dei dati sull'account
+        add_action("woocommerce_process_myaccount_field_billing_phone", array(__CLASS__, 'update_billing_phone_account_address'), 10);
+
+        // WC Notice se il numero di telefono non è valido
+        add_action('woocommerce_after_checkout_validation', array(__CLASS__, 'validate_phone_number'));
     }
 
     // Verifica se WooCommerce è attivo
@@ -50,7 +56,7 @@ class PhoneNumberValidator
     }
 
     // Aggiorna il numero di telefono
-    public static function update_billing_phone($order_id)
+    public static function update_billing_phone_after_order($order_id)
     {
         $final_phone_number = sanitize_text_field($_POST['final_phone_number']);
         $order = wc_get_order($order_id);
@@ -60,7 +66,25 @@ class PhoneNumberValidator
         $order->update_meta_data('_billing_phone', $final_phone_number);
         $order->save();
     }
+
+    public static function update_billing_phone_account_address()
+    {
+        $final_phone_number = sanitize_text_field($_POST['final_phone_number']);
+        return $final_phone_number;
+    }
+
+    public static function validate_phone_number()
+    {
+        $validePhone = wc_clean($_POST['final_phone_number']);
+
+        if (isset($validePhone)) {
+            if ($validePhone === 'false') {
+                wc_add_notice(__('<strong>Numero di telefono</strong> non è valido. Per favore, inserisci un numero valido.', 'text-domain'), 'error');
+            }
+        }
+    }
+
 }
 
-// Inizializza il plugin
+// Inizializza la classe
 PhoneNumberValidator::init();
