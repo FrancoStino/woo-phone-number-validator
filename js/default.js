@@ -25,37 +25,8 @@ jQuery(document).ready(function ($) {
         });
     };
 
-    // Aggiungi !important a tutti gli stili esistenti
-    const importantStyle = function () {
-        if (input) {
-            var stileInline = input.getAttribute("style") || "";
-
-            // Aggiungi !important solo ai valori esistenti e se non è già presente
-            if (stileInline) {
-                var stiliArray = stileInline.split(';').filter(Boolean);
-                if (!stiliArray.some(style => style.includes("!important"))) {
-                    stileInline = stiliArray.map(style => style + ' !important').join(';');
-                }
-            }
-
-            // Imposta lo stile aggiornato
-            input.setAttribute("style", stileInline);
-
-            // Popola il campo nascosto per salvare il numero completo con prefisso
-            /*if (input.value.length > 0) {
-                if (iti.isValidNumber()) {
-                    finalPhoneNumber.setAttribute('value', iti.getNumber());
-                    //$('input[name="final_phone_number"]').val(iti.getNumber());
-                } else {
-                    finalPhoneNumber.setAttribute('value', 'false');
-                    //$('input[name="final_phone_number"]').val(false);
-                }
-            } else {
-                $('input[name="final_phone_number"]').val(null);
-            }*/
-        }
-    };
-
+    input.setAttribute("inputmode", "numeric");
+    input.setAttribute("oninput", "this.value = this.value.replace(/\\D+/g, '')");
     // Inizializza intlTelInput all'avvio
     initializeIntlTelInput();
     // Inizializza importanStyle all'avvio
@@ -63,11 +34,20 @@ jQuery(document).ready(function ($) {
 
     const reset = function () {
         $("#phone_error").text("").removeClass();
+    };
 
-        if (input.value) {
+    input.addEventListener('blur', function () {
+        reset();
+        if (input.value.trim()) {
             if (iti.isValidNumber()) {
-                $("#phone_error").removeClass().addClass('valid').text("Numero valido!");
-                finalPhoneNumber.setAttribute('value', iti.getNumber());
+                const phoneNumber = iti.getNumber();
+                $("#phone_error").removeClass().addClass('valid').text("Numero valido!" /*+ "Full international format: " + phoneNumber*/);
+
+                // Rimuovi l'input esistente se presente
+                $("#final_phone_number").remove();
+
+                // Aggiungi dinamicamente l'input con il numero ottenuto
+                checkout_form.append('<input type="hidden" id="final_phone_number" name="final_phone_number" value="' + phoneNumber + '">');
             } else {
                 const errorCode = iti.getValidationError()
                 input.focus();
@@ -75,28 +55,13 @@ jQuery(document).ready(function ($) {
                 finalPhoneNumber.setAttribute('value', 'false');
             }
         }
-    };
+    });
 
-    //console.log(iti.isValidNumber());
-
-    /**
-     * Trigger Eventi per gli errori e il clonaggio del valore.
-     */
-    input.addEventListener('blur', reset);
+    // on keyup / change flag: reset
     input.addEventListener('change', reset);
-    //input.addEventListener('keyup', reset);
-    //input.addEventListener('keypress', reset);
-    input.addEventListener('keydown', reset);
-    //input.addEventListener('input', reset);
-    //input.addEventListener('submit', reset)
+    input.addEventListener('keyup', reset);
 
-
-    /**
-     * Trigger Eventi per il padding important fisso (utile solo per il plugin CheckoutWC)
-     */
-    input.addEventListener('input', importantStyle);
-
-
+    var checkout_form = $('form.checkout');
 
     // Ottieni il valore di border-radius dall'input
     var borderRadiusValue = $('#billing_phone').css('border-radius');
@@ -114,4 +79,14 @@ jQuery(document).ready(function ($) {
     // Inizializza reset all'avvio
     reset();
 
+    // Applica il valore a #phone_error per border-radius
+    $('#phone_error').css('border-radius', borderRadiusValue);
+
+<<<<<<< HEAD
+
+    // Inizializza reset all'avvio
+    reset();
+
+=======
+>>>>>>> 8790018dabd3f6bff99cf4243ac163181b925444
 });
